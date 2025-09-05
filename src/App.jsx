@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Toaster } from 'react-hot-toast';
 import {
   BrowserRouter as Router,
   Navigate,
@@ -51,6 +52,14 @@ const App = () => {
           />
         </Routes>
       </Router>
+      <Toaster
+      toastoptions={{
+        className:" ",
+        style:{
+          fontSize: '13px'
+        },
+      }}
+      />
     </UserProvider>
   );
 };
