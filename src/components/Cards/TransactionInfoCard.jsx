@@ -8,12 +8,13 @@ import {
 } from 'react-icons/lu';
 
 const TransactionInfoCard = ({ 
-                title,
+              title,
               icon,
               date,
               amount,
               type,
-              hideDeleteBtn
+              hideDeleteBtn,
+              onDelete
             }) => {
                 const getAmountStyles = () =>  type === "income" ? "bg-green-50 text-green-500" : "bg-red-50 text-red-500";
 
@@ -33,20 +34,23 @@ const TransactionInfoCard = ({
         </div>
         <div className="flex item-center gap-2">
             {!hideDeleteBtn && (
-              <button className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+              <button 
+              className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+              onClick={onDelete}
+              >  
                 <LuTrash2 size={18}/>
               </button>
             )}
-        <div className={`flex items-center gap-2 px-3 py-1.5 rounded-md ${getAmountStyles()}`}
-        >
+            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-md ${getAmountStyles()}`}
+            >
             <h6 className="text-xs font-medium">
                     {type === "income" ? "+" : "-"} ${amount}
             </h6>
             {type === "income" ? <LuTrendingUp /> : <LuTrendingDown />}
             </div>
+          </div>
         </div>
-        </div>
-  </div>
+      </div>
   );
 };
 
