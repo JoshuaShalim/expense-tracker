@@ -19,21 +19,20 @@ import RecentIncomeWithChart
   from '../../components/Dasboard/RecentIncomeWithChart';
 import RecentTransaction from '../../components/Dasboard/RecentTransaction';
 import DashboardLayout from '../../components/layouts/dashboardLayout';
-import DotsLoader from '../../components/Loader/DotsLoader'; // 👈 import loader
+import DotsLoader from '../../components/Loader/DotsLoader';
 import { useUserAuth } from '../../hooks/useUserAuth';
 import { API_PATHS } from '../../utils/apiPaths';
 import axiosInstance from '../../utils/axiosInstance';
 import { addThousandsSeparator } from '../../utils/helper';
 
 const Home = () => {
-  const { user, loading } = useUserAuth(); // 👈 handles auth
+  const { user, loading } = useUserAuth();
   const [dashboardData, setDashboardData] = useState(null);
   const [fetching, setFetching] = useState(false);
   const navigate = useNavigate();
 
   const fetchDashboardData = async () => {
     if (fetching) return;
-
     setFetching(true);
     try {
       const response = await axiosInstance.get(API_PATHS.DASHBOARD.GET_DATA);
@@ -47,24 +46,15 @@ const Home = () => {
     }
   };
 
-  // 👇 only fetch after user is confirmed
   useEffect(() => {
     if (!loading && user) {
       fetchDashboardData();
     }
   }, [loading, user]);
 
-  // ✅ Auth still loading
-  if (loading) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        <DotsLoader />
-      </div>
-    );
-  }
-
-  // ✅ Dashboard fetching
-  if (fetching) {
+  // ✅ Unified loader for both auth & dashboard fetch
+  const isLoading = loading || fetching;
+  if (isLoading) {
     return (
       <div className="h-screen flex items-center justify-center">
         <DotsLoader />
@@ -82,14 +72,12 @@ const Home = () => {
             value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
             colors="bg-primary"
           />
-
           <InfoCard
             icon={<LuWalletMinimal />}
             label="Total Income"
             value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
             colors="bg-orange-500"
           />
-
           <InfoCard
             icon={<LuHandCoins />}
             label="Total Expense"
@@ -103,31 +91,24 @@ const Home = () => {
             transactions={dashboardData?.recentTransactions}
             onSeeMore={() => navigate("/expense")}
           />
-
           <FinanceOverview
             totalBalance={dashboardData?.totalBalance || 0}
             totalIncome={dashboardData?.totalIncome || 0}
             totalExpense={dashboardData?.totalExpenses || 0}
           />
-
           <ExpenseTransactions
-            transactions={
-              dashboardData?.last30DaysExpenses?.transactions || []
-            }
+            transactions={dashboardData?.last30DaysExpenses?.transactions || []}
             onSeeMore={() => navigate("/expense")}
           />
-
           <Last30DaysExpenses
             data={dashboardData?.last30DaysExpenses?.transactions || []}
           />
-
           <RecentIncomeWithChart
             data={
               dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) || []
             }
             totalIncome={dashboardData?.totalIncome || 0}
           />
-
           <RecentIncome
             transactions={dashboardData?.last60DaysIncome?.transactions || []}
             onSeeMore={() => navigate("/income")}
