@@ -18,6 +18,7 @@ import RecentIncome from '../../components/Dasboard/RecentIncome';
 import RecentIncomeWithChart
   from '../../components/Dasboard/RecentIncomeWithChart';
 import RecentTransaction from '../../components/Dasboard/RecentTransaction';
+import InsightCard from '../../components/Insights/InsightCard';
 import DashboardLayout from '../../components/layouts/dashboardLayout';
 import DotsLoader from '../../components/Loader/DotsLoader';
 import { useUserAuth } from '../../hooks/useUserAuth';
@@ -36,9 +37,7 @@ const Home = () => {
     setFetching(true);
     try {
       const response = await axiosInstance.get(API_PATHS.DASHBOARD.GET_DATA);
-      if (response.data) {
-        setDashboardData(response.data);
-      }
+      if (response.data) setDashboardData(response.data);
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
     } finally {
@@ -47,24 +46,21 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (!loading && user) {
-      fetchDashboardData();
-    }
+    if (!loading && user) fetchDashboardData();
   }, [loading, user]);
 
-  // ✅ Unified loader for both auth & dashboard fetch
   const isLoading = loading || fetching;
-  if (isLoading) {
+  if (isLoading)
     return (
       <div className="h-screen flex items-center justify-center">
         <DotsLoader />
       </div>
     );
-  }
 
   return (
     <DashboardLayout activeMenu="Dashboard">
       <div className="my-5 mx-auto">
+        {/* Top Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InfoCard
             icon={<IoMdCard />}
@@ -86,6 +82,7 @@ const Home = () => {
           />
         </div>
 
+        {/* Main Dashboard Sections */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           <RecentTransaction
             transactions={dashboardData?.recentTransactions}
@@ -114,6 +111,12 @@ const Home = () => {
             onSeeMore={() => navigate("/income")}
           />
         </div>
+        {/* Insights Panel */}
+        {dashboardData?.insights && (
+          <div className="mt-5">
+            <InsightCard insights={dashboardData.insights} />
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );
