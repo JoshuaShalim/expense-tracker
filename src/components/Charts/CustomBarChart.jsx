@@ -45,7 +45,10 @@ const CustomBarChart = ({ data }) => {
           {/* Switch between 'month' and 'category' depending on dataset */}
           <XAxis
             dataKey={data.length && data[0].month ? "month" : "category"}
-            tick={{ fontSize: 12, fill: "#555" }}
+            tick={{ fontSize: 8, fill: "#555" }}
+            interval={0}
+            angle={-35}
+            textAnchor="end"
             stroke="none"
           />
           <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
