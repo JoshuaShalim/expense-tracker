@@ -9,7 +9,7 @@ import DeleteAlert from '../../components/DeleteAlert';
 import AddExpenseForm from '../../components/Expense/AddExpenseForm';
 import ExpenseList from '../../components/Expense/ExpenseList';
 import ExpenseOverview from '../../components/Expense/ExpenseOverview';
-import DashboardLayout from '../../components/layouts/dashboardLayout';
+import DashboardLayout from '../../components/layouts/DashboardLayout';
 import Modal from '../../components/Modal';
 import { useUserAuth } from '../../hooks/useUserAuth';
 import { API_PATHS } from '../../utils/apiPaths';

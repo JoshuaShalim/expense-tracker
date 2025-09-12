@@ -9,7 +9,7 @@ import DeleteAlert from '../../components/DeleteAlert';
 import AddIncomeForm from '../../components/Income/AddIncomeForm';
 import IncomeList from '../../components/Income/IncomeList';
 import IncomeOverview from '../../components/Income/IncomeOverview';
-import DashboardLayout from '../../components/layouts/dashboardLayout';
+import DashboardLayout from '../../components/layouts/DashboardLayout';
 import Modal from '../../components/Modal';
 import { useUserAuth } from '../../hooks/useUserAuth';
 import { API_PATHS } from '../../utils/apiPaths';
