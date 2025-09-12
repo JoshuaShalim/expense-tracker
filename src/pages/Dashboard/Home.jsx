@@ -11,13 +11,13 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 import InfoCard from '../../components/Cards/InfoCard';
-import ExpenseTransactions from '../../components/Dasboard/ExpenseTransactions';
-import FinanceOverview from '../../components/Dasboard/FinanceOverview';
-import Last30DaysExpenses from '../../components/Dasboard/last30DaysExpenses';
-import RecentIncome from '../../components/Dasboard/RecentIncome';
+import ExpenseTransactions from '../../components/Dashboard/ExpenseTransactions';
+import FinanceOverview from '../../components/Dashboard/FinanceOverview';
+import Last30DaysExpenses from '../../components/Dashboard/last30DaysExpenses';
+import RecentIncome from '../../components/Dashboard/RecentIncome';
 import RecentIncomeWithChart
-  from '../../components/Dasboard/RecentIncomeWithChart';
-import RecentTransaction from '../../components/Dasboard/RecentTransaction';
+  from '../../components/Dashboard/RecentIncomeWithChart';
+import RecentTransaction from '../../components/Dashboard/RecentTransaction';
 import InsightCard from '../../components/Insights/InsightCard';
 import DashboardLayout from '../../components/layouts/dashboardLayout';
 import DotsLoader from '../../components/Loader/DotsLoader';
