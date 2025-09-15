@@ -2,7 +2,7 @@ import React from 'react';
 
 import { LuTrendingUpDown } from 'react-icons/lu';
 
-import CARD_2 from '../../assets/images/CARD_2.png';
+import CARD_2 from '../../assets/images/CARD_2.PNG';
 
 const AuthLayout = ({ children }) => {
   return <div className='flex'>
