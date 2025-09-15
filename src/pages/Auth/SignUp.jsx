@@ -42,46 +42,45 @@ const SignUp = () => {
       setError("Please enter a valid email address.");
       return;
     }
-     if (!password) {
-    setError("Please enter a password.");
-    return;
+    if (!password) {
+      setError("Please enter a password.");
+      return;
     }
     if (password.length < 8) {
-    setError("Password must be at least 8 characters long.");
-    return;
+      setError("Password must be at least 8 characters long.");
+      return;
     }
     setError("");
 
     // Sign Up API Call
-    try{
-
-        //Upload image if present
-        if (profilePic){
-          const imgUploadRes = await uploadImage(profilePic);
-          profileImageUrl = imgUploadRes.imageUrl || "";
-        }
-
-        const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
-          fullName,
-          email,
-          password,
-          profileImageUrl
-        });
-
-        const { token, user } = response.data || {};
-
-        if (token) {
-          localStorage.setItem("token", token);
-          updateUser(user);
-          navigate("/dashboard");
-        }
-      } catch (error) {
-        if (error.response && error.response.data.message) {
-          setError(error.response.data.message);
-        } else {
-          setError("Something went wrong. Please try again.");
-        }
+    try {
+      //Upload image if present
+      if (profilePic) {
+        const imgUploadRes = await uploadImage(profilePic);
+        profileImageUrl = imgUploadRes.imageUrl || "";
       }
+
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+        fullName,
+        email,
+        password,
+        profileImageUrl,
+      });
+
+      const { token, user } = response.data || {};
+
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser(user);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    }
   };
 
   return (
@@ -92,38 +91,40 @@ const SignUp = () => {
           Join us today by entering your details below.
         </p>
         <form onSubmit={handleSignUp}>
-
           <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
 
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-          <Input
-            value={fullName}
-            onChange={({ target }) => setFullName(target.value)}
-            label="Full Name"
-            placeholder="John Doe"
-            type="text"
-          />
-          
-          <Input
-            value={email}
-            onChange={({ target }) => setEmail(target.value)}
-            label="Email Address"
-            placeholder="john@example.com"
-            type="email"
-          />
-          <div className="col-span-2">
-          <Input
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-            label="Password"
-            placeholder="Min 8 Characters"
-            type="password"
-          />
+          {/* Flex column on mobile, grid on md+ */}
+          <div className="flex flex-col space-y-4 md:grid md:grid-cols-2 md:gap-6 md:space-y-0">
+            <Input
+              value={fullName}
+              onChange={({ target }) => setFullName(target.value)}
+              label="Full Name"
+              placeholder="John Doe"
+              type="text"
+            />
+
+            <Input
+              value={email}
+              onChange={({ target }) => setEmail(target.value)}
+              label="Email Address"
+              placeholder="john@example.com"
+              type="email"
+            />
+
+            <div className="md:col-span-2">
+              <Input
+                value={password}
+                onChange={({ target }) => setPassword(target.value)}
+                label="Password"
+                placeholder="Min 8 Characters"
+                type="password"
+              />
+            </div>
           </div>
-          </div>
+
           {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
 
-          <button type="submit" className="btn-primary">
+          <button type="submit" className="btn-primary w-full mt-4">
             SIGN UP
           </button>
 
