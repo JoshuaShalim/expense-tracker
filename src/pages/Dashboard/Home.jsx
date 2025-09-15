@@ -14,7 +14,7 @@ import InfoCard from '../../components/Cards/InfoCard';
 import ExpenseTransactions
   from '../../components/Dashboard/ExpenseTransactions';
 import FinanceOverview from '../../components/Dashboard/FinanceOverview';
-import Last30DaysExpenses from '../../components/Dashboard/last30DaysExpenses';
+import Last30DaysExpenses from '../../components/Dashboard/Last30DaysExpenses';
 import RecentIncome from '../../components/Dashboard/RecentIncome';
 import RecentIncomeWithChart
   from '../../components/Dashboard/RecentIncomeWithChart';
