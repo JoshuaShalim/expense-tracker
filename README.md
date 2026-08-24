@@ -1,12 +1,58 @@
-# React + Vite
+# Flow Finance — MERN Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive personal-finance dashboard for recording income and expenses, reviewing recent activity, and visualizing cash flow. This repository contains the React frontend; the API is maintained in the [expense-tracker-backend](https://github.com/JoshuaShalim/expense-tracker-backend) repository.
 
-Currently, two official plugins are available:
+**Live app:** https://myflowfinance.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Implemented features
 
-## Expanding the ESLint configuration
+- Account registration and JWT-based sign-in
+- Protected dashboard, income, and expense routes
+- Add, view, and delete income and expense records
+- Balance, income, and expense summary cards
+- Recent-transaction and 30/60-day visualizations with Recharts
+- Expense category suggestions based on transaction text
+- Income and expense exports to Excel
+- Profile image upload through the backend
+- Responsive layouts, loading states, validation, and toast feedback
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Stack
+
+- React 19 and Vite
+- React Router
+- Tailwind CSS 4
+- Axios
+- Recharts
+- Node.js, Express, MongoDB, Mongoose, and JWT in the companion API
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Create a `.env` file and point the frontend to the API:
+
+```env
+VITE_API_URL=http://localhost:5000/api/v1
+```
+
+Production deployments can provide `VITE_API_URL` through the hosting platform's environment-variable settings.
+
+## Available scripts
+
+```bash
+npm run dev      # start Vite development server
+npm run build    # create a production build
+npm run lint     # run ESLint
+npm run preview  # preview the production build
+```
+
+## Related repository
+
+- Backend API: https://github.com/JoshuaShalim/expense-tracker-backend
+
+## Author
+
+[Joshua Shalim](https://github.com/JoshuaShalim) — Full-Stack Developer in Doha, Qatar
